@@ -1,0 +1,116 @@
+{% extends "layout.html" %}
+{% block content %}
+{% if mensaje %}
+
+<div class="alert alert-success" role="alert">
+    <ul>
+        <li>{{ mensaje }}</li>
+    </ul>
+</div>
+{% endif %}
+<h1>Validar Denuncia</h1>
+
+<div class="container card-body">
+    <span class="card-text">
+        <form action="{{ url_for('validar_denuncia', id=denuncia.id_denuncia) }}" method="POST">
+            <section class="form-group">
+                <label for="titulo"> Título </label>                
+                <input type="text" class="form-control form-control-lg rounded-0" name="titulo" id="titulo" value="{{ denuncia.titulo }}" readonly>
+            </section>
+            <section class="form-group">
+                <label for="categoria"> Categoría </label>
+                    {% for categoria in categorias %}
+                        {% if  categoria.id_categoria == denuncia.categoria_id %}
+                        <input type="text" class="form-control form-control-lg rounded-0" name="categoria" id="{{ categoria.id_categoria }}" value="{{ categoria.nombre }}"readonly>                          
+                        {% endif %}
+                    {% endfor %}                    
+            </section>
+            <section class="form-group">
+            <label for="fecha_cierre"> Fecha de cierre </label>
+                {% if denuncia.fecha_cierre == None %}
+                    <input type="text" id="fecha_cierre" name="fecha_cierre"value="Sin fecha de cierre" readonly>
+                {% else %}
+                    <input type="text" id="fecha_cierre" name="fecha_cierre"value="{{denuncia.fecha_cierre}}" readonly>
+                {% endif %}
+            </section>
+            
+            <label for="descripcion"> Descripción </label>
+            <section class="form-group">  
+            <textarea name="descripcion" rows="5" cols="100"readonly >{{ denuncia.descripcion }}</textarea>
+            </section>
+             <section class="form-group">
+                <label for="apellido"> Apellido del Denunciante </label>
+                <input type="text" class="form-control form-control-lg rounded-0" name="apellido" id="apellido" value="{{ denuncia.apellido}}" readonly>
+            </section>
+
+            <section class="form-group">
+                <label for="nombre"> Nombre del Denunciante</label>
+                <input type="text" class="form-control form-control-lg rounded-0" name="nombre" id="nombre" value={{ denuncia.nombre}} readonly>
+            </section>
+
+            <section class="form-group">
+                <label for="telefono"> Teléfono del Denunciante </label>
+                <input type="text" class="form-control form-control-lg rounded-0" name="telefono" id="telefono" value={{ denuncia.telefono}} readonly>
+            </section>
+
+            <section class="form-group">
+                <label for="email"> Correo del Denunciante </label>
+                <input type="text" class="form-control form-control-lg rounded-0" name="email" id="email" value={{ denuncia.email}} readonly>
+            </section>                 
+
+            <section class="form-group">                
+                <input type="text" id="asignado_id" name="asignado_id" style="display: none;" value={{ denuncia.asignado_id}}>
+            </section>  
+            <section class="form-group">                              
+                <label for="seguimiento"> Seguimientos <br> 
+                <table>                    
+                    <tbody>
+                        <div class="container">                                                                                                         
+                            {% for seguimiento in seguimientos %}
+                                {% if  (seguimiento.denuncia_id == denuncia.id_denuncia) %}
+                                    <tr>
+                                        <td><b>*</b>El Día: <b>{{seguimiento.fecha}}</b>
+                                        La denuncia ha pasado a estar: <b>{{seguimiento.estado.nombre}}</b>
+                                        Realizado por: <b>{{seguimiento.autor.usuario}}</b>
+                                        Observaciones: <b>{{seguimiento.descripcion}}</b></td>                                                                                                                                                                                      
+                                    </tr>
+                                {% endif %}                                
+                            {% endfor %}  
+                        </div>
+                      </tbody>
+                    </table>     
+                </label> 
+            </section>                         
+            <section class="form-group">
+                {% if  denuncia.estado.id_estado  == 4 %}
+                    <b>Denuncia cerrada. No ha sido posible contactar al denunciante</b>                
+                {% else %}
+                    <label for="estado"> Podrás realizar un cambio de estado y escribir una descripción por dicho cambio, siempre que el estado escogido, no sea cerrado</label>
+                    <select name="estado" class="selectpicker form-control" onchange="visible(this.value)">
+                    {% for estado in estados %}                        
+                        {% if  estado.id_estado == denuncia.estado_id %}                          
+                            <option id="{{ estado.id_estado }}"selected>{{ estado.nombre }}</option>                        
+                        {% else %}
+                            <option id="{{ estado.id_estado }}">{{ estado.nombre }}</option>                        
+                        {% endif %}
+                    {% endfor %}
+                    </select>
+            </section>                            
+                <section class="form-group">  
+                <textarea name="descripcionseguimiento" id="descripcionseguimiento" rows="5" cols="100"></textarea>
+                </section>
+                
+            <!-- </section>
+            <label for="descripcionseguimiento"> Descripción para un Seguimiento </label>
+            <section class="form-group">  
+            <textarea name="descripcionseguimiento" rows="5" cols="100"></textarea>
+            </section> -->
+                <div class="text-right">
+                    <a href="{{ url_for('denuncias') }}" class="btn btn-white">Cancelar</a>
+                    <button type="submit" class="btn btn-info">Aceptar</button>
+                </div>              
+            {% endif %}
+        </form>       
+    </span>
+</div>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+{% block content %}
+{% if mensaje %}
+<div class="alert alert-success" role="alert">
+    <ul>
+        <li>{{ mensaje }}</li>
+    </ul>
+</div>
+{% endif %}
+{% if mensaje_error %}
+<div class="alert alert-danger" role="alert">
+    <ul>
+        <li>{{ mensaje_error }}</li>
+    </ul>
+</div>
+{% endif %}
+<h1>Aprobar usuario {{usuario.usuario}}</h1>
+<!-- Aquí no salta después del h1 -->
+<div id="header">
+    <h3>Nombre de usuario: </h3> {{usuario.usuario}}
+</div>
+<hr/>
+<div id="header">
+    <h3>Correo: </h3> {{usuario.email}}
+</div>
+<hr/>
+<div id="header">
+    <h3>Nombre: </h3> {{usuario.nombre}}
+</div>
+<hr/>
+<div id="header">
+    <h3>Apellido: </h3> {{usuario.apellido}}
+</div>
+<hr/>
+<div id="header">
+    <h3>Fecha de solicitud: </h3> {{usuario.fecha_solicitud}}
+</div>
+<hr/>
+<div class="container card-body">
+    <span class="card-text">
+        {% if (usuario.aprobado == 0) %}
+        <form action="{{ url_for('aprobar_usuario', id=usuario.id) }}" method="POST">
+            <section class="form-group">
+                <label for="roles"> Por favor seleccione el/los roles para el usuario </label><br>
+                {% for rol in roles %}
+                <input type="checkbox" id="cb{{rol.id}}" name="roles" value="{{rol.id}}">
+                <span class="badge badge-info">{{rol.nombre}}</span><br>
+                {% endfor %}
+            </section>
+            
+            <div class="text-right">
+                <a href="{{ url_for('listado_usuarios_google') }}" class="btn btn-white">Cancelar</a>
+                <button type="submit" class="btn btn-info">Aceptar</button>
+            {% endif %}
+            </div>
+        </form>
+    </span>
+</div>
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends "layout.html" %}
+{% block content %}
+{% if mensaje %}
+<div class="alert alert-success" role="alert">
+    <ul>
+        <li>{{ mensaje }}</li>
+    </ul>
+</div>
+{% endif %}
+{% if errores %}
+    {% for motivo, descripcion in errores.items() %}
+    <div class="alert alert-warning" role="alert">
+     <p> {{ motivo }} : {{ descripcion }}</p>
+    </div>
+    {% endfor %}
+{% endif %}
+<h1>Editar Denuncia</h1>
+
+<div class="container card-body">
+    <span class="card-text">
+        <form action="{{ url_for('editar_denuncia', id=denuncia.id_denuncia) }}" method="POST">
+            <section class="form-group">
+                <label for="titulo"> Título </label>                
+                <input type="text" class="form-control form-control-lg rounded-0" name="titulo" id="titulo" value="{{ denuncia.titulo }}"required>
+            </section>
+            <section class="form-group">
+                <label for="categoria"> Seleccione la Categoría </label>
+                    <select name="categoria" class="selectpicker form-control">
+                    {% for categoria in categorias %}
+                        {% if  categoria.id_categoria == denuncia.categoria_id %}                          
+                            <option id="{{ categoria.id_categoria }}"selected>{{ categoria.nombre }}</option>                        
+                        {% else %}
+                            <option id="{{ categoria.id_categoria }}">{{ categoria.nombre }}</option>                        
+                        {% endif %}
+                    {% endfor %}
+                    </select>
+            
+            <label for="descripcion"> Descripción </label>
+            <section class="form-group">  
+            <textarea name="descripcion" rows="5" cols="100">{{ denuncia.descripcion }}</textarea>
+            </section>
+
+            <label for="categoria"> Seleccione en el mapa el lugar de la denuncia </label>
+
+            <div id="mapa_simple">
+            </div>
+            <input type="text" id="editarte" name="editarte" style="display: none;" value="editar">
+            <input type="text" id="corx" name="latitud" style="display: none;" value={{ denuncia.latitud}}>
+            <input type="text" id="cory" name="longitud" style="display: none;"value={{ denuncia.longitud}}>
+
+            <section class="form-group">
+                <label for="usuario"> Usuario que Gestiona la Denuncia </label>
+                    <select name="usuario" class="selectpicker form-control">
+                        <option value="">Ninguno</option>
+                    {% for usuario in usuarios %}
+                        {% if  usuario.id == denuncia.asignado_id %}                          
+                            <option value="{{ usuario.id }}"selected>{{ usuario.usuario }}</option>                        
+                        {% else %}
+                            <option value="{{ usuario.id }}">{{ usuario.usuario }}</option>                        
+                        {% endif %}                        
+                    {% endfor %}
+                    </select>
+            </section>        
+
+            <section class="form-group">
+                <label for="apellido"> Apellido del Denunciante </label>
+                <input type="text" class="form-control form-control-lg rounded-0" name="apellido" id="apellido" value={{ denuncia.apellido}} required>
+            </section>
+
+            <section class="form-group">
+                <label for="nombre"> Nombre del Denunciante</label>
+                <input type="text" class="form-control form-control-lg rounded-0" name="nombre" id="nombre" value={{ denuncia.nombre}} required>
+            </section>
+
+            <section class="form-group">
+                <label for="telefono"> Teléfono del Denunciante </label>
+                <input type="text" class="form-control form-control-lg rounded-0" name="telefono" id="telefono" value={{ denuncia.telefono}} required>
+            </section>
+
+            <section class="form-group">
+                <label for="email"> Correo del Denunciante </label>
+                <input type="text" class="form-control form-control-lg rounded-0" name="email" id="email" value={{ denuncia.email}} required>
+            </section>
+            <div class="text-right">
+                <a href="{{ url_for('denuncias') }}" class="btn btn-white">Cancelar</a>
+                <button type="submit" class="btn btn-info">Aceptar</button>
+            </div>            
+        </form>
+    </span>
+</div>
+{% endblock %}

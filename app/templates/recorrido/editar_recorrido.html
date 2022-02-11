@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block content %}
+{% if mensaje %}
+<div class="alert alert-success" role="alert">
+    <ul>
+        <li>{{ mensaje }}</li>
+    </ul>
+</div>
+{% endif %}
+{% if mensaje_error %}
+<div class="alert alert-danger" role="alert">
+    <ul>
+        <li>{{ mensaje_error }}</li>
+    </ul>
+</div>
+{% endif %}
+<h1>Editar Recorrido</h1>
+<div class="container card-body">
+    <span class="card-text">
+        <form action="{{ url_for('editar_recorrido', id=recorrido.id_recorrido) }}" method="POST">
+            <section class="form-group">
+                <label for="nombre"> Nombre </label>
+                <input type="text" class="form-control form-control-lg rounded-0" name="nombre" id="nombre" value="{{recorrido.nombre}}" required>
+            </section>
+            <label for="descripcion"> Descripción </label>
+            <section class="form-group">  
+            <textarea name="descripcion" rows="5" cols="100">{{ recorrido.descripcion }}</textarea>
+            </section>
+            <label for="coords"> Coordenadas </label>
+            <section class="form-group">  
+            <textarea name="coords" rows="5" cols="100">{{ recorrido.coordenadas }}</textarea>
+            </section>
+            <div class="text-right">
+                <a href="{{ url_for('listado_recorrido') }}" class="btn btn-white">Cancelar</a>
+                <button type="submit" class="btn btn-info">Aceptar</button>
+            </div>
+        </form>
+    </span>
+</div>
+{% endblock %}

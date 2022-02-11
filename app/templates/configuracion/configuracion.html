@@ -1,0 +1,111 @@
+{% extends "layout.html" %} {% block content %}
+<h1>Configuracion</h1>
+{% if mensaje %}
+<div class="alert alert-success" role="alert">
+    <ul>
+        <li>{{ mensaje }}</li>
+    </ul>
+</div>
+{% endif %}
+{% if errores %}
+    {% for motivo, descripcion in errores.items() %}
+    <div class="alert alert-warning" role="alert">
+     <p> {{ motivo }} : {{ descripcion }}</p>
+    </div>
+    {% endfor %}
+{% endif %}
+<div class="card-body container">
+  <span class="card-text">
+    {% if configuracion_colores %}
+    <form method="POST">
+      <section class="form-group">
+        <label for="titulo"> Cantidad de elementos mostrados por página </label>
+        <input
+          type="number"
+          min="1"
+          class="form-control form-control-lg rounded-0"
+          name="cantPagina"
+          id="cantPagina"
+          value="{{configuracion_colores.obtener_configuracion().cantidad_elementos_pagina}}"
+          required
+        />
+      </section>
+      <section class="form-group">
+        <label for="criterio">Criterio de ordenación</label>
+        <select id="criterio" name="criterio" class="custom-select">
+          {% if configuracion_colores.obtener_configuracion().criterio_ordenacion == "desc" %}
+          <option value="asc">Ascendente</option>
+          <option selected="true" value="desc">Descendente</option>
+          {% else %}
+          <option selected="true" value="asc">Ascendente</option>
+          <option value="desc">Descendente</option>
+          {% endif %}
+        </select>
+      </section>
+
+      <section class="form-group">
+        <label for="color_p">Color primario del sitio</label>
+        <select id="color_p" name="color_p" class="custom-select">
+          {% if configuracion_colores.obtener_configuracion().color_primario == "red" %}
+          <option value="blue">Azul</option>
+          <option selected="true" value="red">Rojo</option>
+          <option value="yellow">Amarillo</option>
+          {% elif configuracion_colores.obtener_configuracion().color_primario == "blue" %}
+          <option value="red">Rojo</option>
+          <option value="yellow">Amarillo</option>
+          <option selected="true" value="blue">Azul</option>
+          {% else %}
+          <option value="red">Rojo</option>
+          <option selected="true" value="yellow">Amarillo</option>
+          <option value="blue">Azul</option>
+          {% endif %}
+        </select>
+      </section>
+
+      <section class="form-group">
+        <label for="color_s">Color secundario del sitio</label>
+        <select id="color_s" name="color_s" class="custom-select">
+          {% if configuracion_colores.obtener_configuracion().color_secundario == "red" %}
+          <option value="blue">Azul</option>
+          <option selected="true" value="red">Rojo</option>
+          <option value="yellow">Amarillo</option>
+          {% elif configuracion_colores.obtener_configuracion().color_secundario == "blue" %}
+          <option value="red">Rojo</option>
+          <option value="yellow">Amarillo</option>
+          <option selected="true" value="blue">Azul</option>
+          {% else %}
+          <option value="red">Rojo</option>
+          <option selected="true" value="yellow">Amarillo</option>
+          <option value="blue">Azul</option>
+          {% endif %}
+        </select>
+      </section>
+
+      <section class="form-group">
+        <label for="color_t">Color terciario del sitio</label>
+        <select id="color_t" name="color_t" class="custom-select">
+          {% if configuracion_colores.obtener_configuracion().color_terciario == "red" %}
+          <option value="blue">Azul</option>
+          <option selected="true" value="red">Rojo</option>
+          <option value="yellow">Amarillo</option>
+          {% elif configuracion_colores.obtener_configuracion().color_terciario == "blue" %}
+          <option value="red">Rojo</option>
+          <option value="yellow">Amarillo</option>
+          <option selected="true" value="blue">Azul</option>
+          {% else %}
+          <option value="red">Rojo</option>
+          <option selected="true" value="yellow">Amarillo</option>
+          <option value="blue">Azul</option>
+          {% endif %}
+        </select>
+      </section>
+
+      <div class="text-right">
+        <a href="{{ url_for('index') }}" class="btn btn-white">Cancelar</a>
+        <button type="submit" class="btn btn-info">Aceptar</button>
+      </div>
+    </form>
+    {% endif %}
+  </span>
+</div>
+{% endblock %}

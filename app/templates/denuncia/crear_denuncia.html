@@ -1,0 +1,89 @@
+{% extends "layout.html" %}
+{% block content %}
+{% if mensaje %}
+<div class="alert alert-success" role="alert">
+    <ul>
+        <li>{{ mensaje }}</li>
+    </ul>
+</div>
+{% endif %}
+{% if errores %}
+    {% for motivo, descripcion in errores.items() %}
+    <div class="alert alert-warning" role="alert">
+     <p> {{ motivo }} : {{ descripcion }}</p>
+    </div>
+    {% endfor %}
+{% endif %}
+<h1>Nueva denuncia</h1>
+
+<div class="container card-body">
+    <span class="card-text">
+        <form action="" method="POST" id="formulario">
+            <section class="form-group">
+                <label for="titulo"> Titulo </label>
+                <input type="text" class="form-control form-control-lg rounded-0" name="titulo" id="titulo" placeholder="Ingrese el titulo" required>
+            </section>
+
+            <section class="form-group">
+                <label for="categoria"> Seleccione categoria </label>
+                    <select name="categoria" class="selectpicker form-control">
+                    {% for categoria in categorias %}
+                        <option value="{{ categoria.nombre }}">{{ categoria.nombre }}</option>
+                    {% endfor %}
+                    </select>
+            </section>
+
+             <label for="categoria"> Ingrese descripcion </label>
+            <section class="form-group">  
+            <textarea name="descripcion" rows="5" cols="100" placeholder="Ingrese descripcion detallada de la denuncia"></textarea>
+            </section>
+
+            <label for="categoria"> Seleccione en el mapa el lugar de la denuncia </label>
+
+            <div id="mapa_simple">
+            </div>
+            <input type="text" id="editarte" name="editarte" style="display: none;" value="crear">
+            <input type="text" id="corx" name="latitud" style="display: none;">
+            <input type="text" id="cory" name="longitud" style="display: none;">
+            
+
+            <section class="form-group">
+                <label for="usuario"> Seleccione el usuario que gestionará la denuncia </label>
+                    <select name="usuario" class="selectpicker form-control">
+                        <option value="">Ninguno</option>
+                    {% for usuario in usuarios %}
+                        <option value="{{ usuario.id }}">{{ usuario.usuario }}</option>
+                    {% endfor %}
+                    </select>
+            </section>
+
+            <section class="form-group">
+                <label for="apellido"> Apellido del denunciante </label>
+                <input type="text" class="form-control form-control-lg rounded-0" name="apellido" id="apellido" placeholder="Ingrese apellido" required>
+            </section>
+
+            <section class="form-group">
+                <label for="nombre"> Ingrese nombre del denunciante</label>
+                <input type="text" class="form-control form-control-lg rounded-0" name="nombre" id="nombre" placeholder="Ingrese el nombre" required>
+            </section>
+
+            <section class="form-group">
+                <label for="telefono"> Ingrese el telefono del denunciante </label>
+                <input type="text" class="form-control form-control-lg rounded-0" name="telefono" id="telefono" placeholder="Ingrese el telefono" required>
+            </section>
+
+            <section class="form-group">
+                <label for="email"> Ingrese el correo del denunciante </label>
+                <input type="text" class="form-control form-control-lg rounded-0" name="email" id="email" placeholder="Ingrese el correo" required>
+            </section>
+
+            
+
+            <div class="text-right">
+                <a href="{{ url_for('denuncias') }}" class="btn btn-white">Cancelar</a>
+                <button type="submit" class="btn btn-info">Aceptar</button>
+            </div>
+        </form>
+    </span>
+</div>
+{% endblock %}

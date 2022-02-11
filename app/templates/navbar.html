@@ -1,0 +1,141 @@
+<div class="pb-3">
+  <nav style='display: flex;
+justify-content: space-between;' class="navbar site-header navbar-expand-lg navbar navbar-dark">
+    <a  title="Logo" href="/"><img class="gba-logo" src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" /></a>
+    <div class="navbar" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+          <!-- Aca irian los botones de arriba -->
+        </ul>
+        <ul class="navbar-nav ml-auto">
+         {% if not auth.authenticated(session) %}
+          <li class="nav-item">
+            <a class="nav-link text-center" href="{{ url_for('login')}}">INICIAR SESION</a>
+          </li>
+          {%else%}
+
+              <li class="nav-item">
+                <nav id="menu">
+                  <ul>
+                    <li><a href="#">Configuraciones</a>
+                      <ul>
+                        {%if permisos.tiene_el_permiso("usuario_index")%}
+                        <li class="nav-item">
+                          <a class="nav-link" href="{{ url_for('vista_configuracion')}}">Configuración del sitio</a>
+                        </li>
+                        {%endif%}
+                      </ul>
+                    </li>
+                  </ul>
+                </nav> 
+
+
+             
+
+              <li class="nav-item">
+                <nav id="menu">
+                  <ul>
+                    <li><a href="#">Puntos de encuentro</a>
+                      <ul>
+                        {%if permisos.tiene_el_permiso("punto_encuentro_new")%}
+                        <li class="nav-item">
+                          <a class="nav-link" href="{{ url_for('administrar_puntos')}}">Administrar puntos de encuentro</a>
+                        </li>
+                        {%endif%}
+                      </ul>
+                    </li>
+                  </ul>
+                </nav> 
+
+             
+
+              <li class="nav-item">
+                <nav id="menu">
+                  <ul>
+                    <li><a href="#">Recorridos</a>
+                      <ul>
+                        {%if permisos.tiene_el_permiso("recorrido_index")%}
+                        <li class="nav-item">
+                          <a class="nav-link" href="{{ url_for('listado_recorrido')}}">Administrar Recorridos de Evacuación</a>
+                        </li>
+                        {%endif%}  
+                      </ul>
+                    </li>
+                  </ul>
+                </nav> 
+             
+
+              <li class="nav-item">
+                <nav id="menu">
+                  <ul>
+                    <li><a href="#">Zonas</a>
+                      <ul>
+                        {%if permisos.tiene_el_permiso("zonas_index")%}
+                        <li class="nav-item">
+                          <a class="nav-link" href="{{ url_for('zonas_index')}}">Administrar Zonas</a>
+                        </li>
+                        {%endif%}                       
+                      </ul>
+                    </li>
+                  </ul>
+                </nav> 
+             
+
+              <li class="nav-item">
+                <nav id="menu">
+                  <ul>
+                    <li><a href="#">Denuncias</a>
+                      <ul>
+                        {%if permisos.tiene_el_permiso("usuario_index")%}
+                          <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('denuncias')}}">Administrar Denuncias</a>
+                          </li>
+                        {%endif%}
+                        <!--para el operador-->
+                        {%if permisos.tiene_el_permiso("denuncia_index")%}
+                         <li class="nav-item">
+                           <a class="nav-link" href="{{ url_for('listado_seguimiento')}}">Seguimiento de Denuncias</a>
+                        </li>
+                        {%endif%}
+                       
+                      </ul>
+                    </li>
+                  </ul>
+                </nav> 
+
+              <li class="nav-item">
+                <nav id="menu">
+                  <ul>
+                    <li><a href="#">Usuarios</a>
+                      <ul>
+                        {%if permisos.tiene_el_permiso("usuario_index")%}
+                         <li class="nav-item">
+                           <a class="nav-link" href="{{ url_for('listado_usuarios')}}">Listado de usuarios</a>
+                         </li>
+                        {%endif%}
+                         <!--nuevo permiso para el administrador-->
+                        {%if permisos.tiene_el_permiso("usuario_google")%}
+                         <li class="nav-item">
+                           <a class="nav-link" href="{{ url_for('listado_usuarios_google')}}">Listado de usuarios de google</a>
+                         </li>
+                        {%endif%}
+                      </ul>
+                    </li>
+                  </ul>
+                </nav>  
+
+              <li class="nav-item">
+                <nav id="menu">
+                  <ul>
+                    <li><a href="#">{{ session['usuario'].usuario }}</a>
+                      <ul>
+                        <li><a href="#"><a class="nav-link" href="{{ url_for('ver_perfil')}}">Ver perfil</a></a></li>
+                        <li><a href="#"><a class="nav-link" href="{{ url_for('cambiar_password', id=session['usuario'].id)}}">Cambiar Password</a></a></li>
+                        <li><a href="#"><a class="nav-link" href="{{ url_for('logout')}}">Cerrar sesión</a></a></li>
+                      </ul>
+                    </li>
+                  </ul>              
+          {%endif%}
+        </ul>
+    </div>
+  </nav>
+</div>

@@ -1,0 +1,41 @@
+.map-container {
+  position: relative;
+}
+
+#mapid {
+  position: absolute;
+  height: 40vh;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+#map_denuncia {
+  height: 300px;
+  width: 900px;
+}
+#map_denuncia_editar {
+  height: 300px;
+  width: 900px;
+}
+#map_punto_editar {
+  height: 300px;
+  width: 900px;
+}
+
+#map_punto {
+  height: 300px;
+  width: 900px;
+}
+
+#map_recorrido {
+  height: 300px;
+  width: 900px;
+}
+
+#mapa_simple {
+  height: 300px;
+  margin-left: 0px;
+  width: 90vw;
+}

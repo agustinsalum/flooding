@@ -1,0 +1,24 @@
+/* Formating Body area */
+body {
+  background-color: rgb(255, 152, 152);
+}
+
+/* Formating Header area */
+.site-header {
+  background-color: #700000;
+}
+
+/* Formating Titles */
+h1 {
+  color: #2f0000;
+}
+
+h2 {
+  color: #2f0000;
+}
+
+h3 {
+  color: #2f0000;
+}
+
+/* Formating Forms */

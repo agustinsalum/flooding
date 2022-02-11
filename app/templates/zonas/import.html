@@ -1,0 +1,27 @@
+{% extends "layout.html" %} {% block content %}
+<a href={{url_for('zonas_index')}}>
+<h4 style="padding: 4rem; display: flex; align-items: center;">
+
+  < 
+  <span style="margin-bottom: 0.25rem; margin-right: 1rem" >---</span>
+  Volver al index de Zonas inundables</h4>
+ </a>
+
+<!-- Aquí no salta después del h1 -->
+{% if mensaje %}
+<div class="alert alert-warning" role="alert">
+  <p>{{ mensaje }}</p>
+</div>
+{% endif %}
+<h1>Subir archivo CSV de Zonas Inundables</h1>
+<form
+style="padding: 4rem;"
+  method="POST"
+  action="{{url_for('zonas_upload')}}"
+  enctype="multipart/form-data"
+>
+  <p><input type="file" name="file" /></p>
+  <p><input type="submit" value="Submit" /></p>
+</form>
+
+{% endblock %}

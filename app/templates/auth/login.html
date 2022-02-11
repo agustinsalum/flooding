@@ -1,0 +1,94 @@
+{% if mensaje_pendiente %}
+<div class="alert alert-success" role="alert">
+    <ul>
+        <li>{{ mensaje_pendiente }}</li>
+    </ul>
+</div>
+{% endif %}
+{% if mensaje_error %}
+<div class="alert alert-danger" role="alert">
+    <ul>
+        <li>{{ mensaje_error }}</li>
+    </ul>
+</div>
+{% endif %}
+{% if errores %}
+    {% for motivo, descripcion in errores.items() %}
+    <div class="alert alert-warning" role="alert">
+     <p> {{ motivo }} : {{ descripcion }}</p>
+    </div>
+    {% endfor %}
+{% endif %}
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Formulario Login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+ integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stylelogin.css') }}">
+  <body>
+    {% if mensaje %}
+    <div class="alert alert-danger" role="alert">
+      <ul>
+        <li>{{ mensaje }}</li>
+      </ul>
+    </div>
+    {% endif %}
+     <div class="container">
+        <div class="row text-center login-page">
+       <div class="col-md-12 login-form">
+          <form action="{{ url_for('login') }}" method="post">            
+             <div class="row">
+            <div class="col-md-12 login-form-header">
+               <p class="login-form-font-header"><span>Iniciar sesion</span><p>
+            </div>
+        </div>
+        <div class="row">
+           <div class="col-md-12 login-from-row">
+              <input name="email" type="text" placeholder="Email" required/>
+           </div>
+        </div>
+        <div class="row">
+           <div class="col-md-12 login-from-row">
+              <input name="clave" type="password" placeholder="Contraseña" required/>
+           </div>
+        </div>
+
+        <div class="row">
+           <div class="col-md-12 login-from-row">
+              <button class="btn btn-info">Entrar</button>
+           </div>
+        </div>
+        </form>
+              
+         <!-- Linea separadora-->
+         <hr size="2px" color="black" />
+
+         <div class="row">
+            <span alt="Iniciar sesion con google" title="Iniciar sesion con google"  class="fas fa-user-edit">
+               <a href="{{ url_for('iniciar_sesion_google')}}" class="btn btn-info">Iniciar sesion con google</a>
+         
+         <p style = "font-family:courier,arial,helvética;"> Si aún no se ha registrado presione registrarse </p>
+         
+         <div class="row">
+            <div class="col-md-12 login-from-row">
+               <button class="btn btn-info" onclick="myFunction()">registrarse</button>
+
+         <!-- style="display: none para que no muestre los botones al principio-->
+         <div id="myDIV" style="display: none;">
+            <div class="row">
+               <span alt="Registrarse con google" title="Registrarse con google"  class="fas fa-user-edit">
+                  <a href="{{ url_for('registrarse_google')}}" class="btn btn-info">Registrarse con google</a>
+              </span>
+            </div>
+            <div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+    </div>
+     </div>
+  </div>
+
+  <script src="{{url_for('static', filename='js/login/registrarse.js')}}"></script>
+</body>
+</html>

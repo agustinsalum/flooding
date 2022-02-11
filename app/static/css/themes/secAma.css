@@ -1,0 +1,20 @@
+.login-form-font-header span {
+  color: #989b00;
+}
+
+form label {
+  color: #b4c100;
+}
+
+/* Estaria bueno */
+form input {
+  border: #c19e00;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  background-color: #feffbd;
+  width: 100%;
+  left: 0;
+}

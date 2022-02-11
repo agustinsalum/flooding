@@ -1,0 +1,29 @@
+
+{% extends "layout.html" %}
+{% block content %}
+<h1>Datos del perfil</h1> 
+
+<!-- Aquí no salta después del h1 -->
+<div id="header">
+    <h3>Nombre de usuario: </h3> {{ session['usuario'].usuario }}
+</div>
+<hr/>
+<div id="header">
+    <h3>Correo: </h3> {{ session['usuario'].email }}
+</div>
+<hr/>
+<div id="header">
+    <h3>Nombre: </h3> {{ session['usuario'].nombre }}
+</div>
+<hr/>
+<div id="header">
+    <h3>Apellido: </h3> {{ session['usuario'].apellido }}
+</div>
+<hr/>
+<div id="header">
+    <h3>cuenta creada: </h3> {{ session['usuario'].fecha_creacion }}
+</div>
+<hr/>
+
+
+{% endblock %}

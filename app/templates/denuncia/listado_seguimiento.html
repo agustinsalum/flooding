@@ -1,0 +1,157 @@
+{% extends "layout.html" %}
+{% block content %}
+{% if mensaje %}
+<div class="alert alert-warning" role="alert">
+    <p>{{ mensaje }}</p>
+</div>
+{% endif %}
+<h1>Seguimientos de Denuncias</h1>
+    {%if permisos.tiene_el_permiso("denuncia_show")%} 
+	  <form name="den" id="den" action="" method="POST">
+      <div class="form-inline">
+        <label for="titulo">Título:</label>
+            {% if  titulo == " " %}
+                <input type="text" placeholder="Buscar por titulo" id="titulo" name="titulo">      
+            {% else %}  
+                <input type="text" value="{{ titulo }}" id="titulo" name="titulo">      
+            {% endif %}			                             
+            <input name="best" id="sec" class="btn btn-info" type="submit" value="Buscar">
+      </div>
+    </form>
+    <br/>
+    {%endif%}
+  </div>
+</form>
+<table class="table table-striped table-bordered bg-white table-sm">
+  <thead>    
+    <tr>
+      <td>Título</td>
+      <td>Categoría</td>
+      <td>Estado</td>
+      <td>Asignado a</td>      
+      <td>Operaciones</td>
+    </tr>
+  </thead>
+  <tbody>
+    <div class="container">           
+        {% for denuncia in denuncias.items %}                  
+            <tr>             
+            <td>{{ denuncia.titulo }}</td> 
+            <td>{{ denuncia.categoria.nombre }}</td>        
+            <td>{{ denuncia.estado.nombre }}</td>
+            {% if denuncia.asignado.usuario %}
+              <td>{{ denuncia.asignado.usuario }}</td>
+            {% else %}
+              <td> <p>Sin usuario asignado</p> </td>
+            {% endif %}           
+            <td> 
+            {% if (denuncia.asignado.id == session["usuario"].id)%}             
+            <!--Veo el boton validar de las denuncias que tengo asignadas-->
+            <span
+              alt="Validar"
+              title="Validar"
+              class="fas fa-user-edit"
+              ><a
+                href="{{ url_for('validar_denuncia', id=denuncia.id_denuncia)}}"
+                class="btn btn-info"
+                >Validar</a
+              ></span
+            >     
+            {% endif %}           
+            {% if (denuncia.asignado.usuario == NULL)%} 
+            <!--si está vacío(es una denuncia creada en vue) y el usuario logueado se la puede asignar-->              
+              <span
+                alt="Asignarme la Denuncia"
+                title="Asignarme la Denuncia"
+                class="fas fa-user-edit"
+                ><a
+                  href="{{ url_for('asignarme_denuncia', id=denuncia.id_denuncia)}}"
+                  class="btn btn-info"
+                  >Asignarme la Denuncia</a
+                ></span
+              >                                                                                    
+          {% endif %} 
+          {%if permisos.tiene_el_permiso("denuncia_destroy")%} 
+          <!--Soy administrador, tengo este permiso para asignarle a otro la denuncia-->          
+            <span
+              alt="Asignar Denuncia a otro Usuario"
+              title="Asignar Denuncia a otro Usuario"
+              class="fas fa-user-edit"
+              ><a
+                href="{{ url_for('asignar_denuncia_usuario', id=denuncia.id_denuncia)}}"
+                class="btn btn-info"
+                >Asignar Denuncia a otro Usuario</a
+              ></span
+            >      
+        {% endif %}          
+      </td> 
+      </tr>  
+        {% endfor %}
+      
+        
+    </div>
+  </tbody>
+</table>
+<!-- PAGINACION -->
+<div class="text-center">
+    <ul class="pagination">
+      {% if not denuncias %}
+        <front FACE="arial">{{mensaje_sin_denuncias}}</front>
+      {% else %}
+        {% if denuncias.has_prev %}
+        <li class="page-item">
+          <a
+            class="page-link"
+            href="{{ url_for('listado_seguimiento', page=denuncias.prev_num, titulo=titulo) }}"
+            >«</a
+          >
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+          <a class="page-link">«</a>
+        </li>
+        {% endif %}
+        <!-- all page numbers -->
+        {% for page_num in denuncias.iter_pages() %} {% if page_num %} {% if
+        page_num != denuncias.page %}
+        <li class="page-item">
+          <a
+            class="page-link"
+            href="{{ url_for('listado_seguimiento', titulo=titulo, page=page_num) }}"
+            >{{ page_num }}</a
+          >
+        </li>
+        {% else %}
+        <li class="page-item active">
+          <a class="page-link" href="#">{{ page_num }}</a>
+        </li>
+        {% endif %} {% else %}
+        <li class="page-item">
+          <span
+            class="page-link ellipsis"
+            style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis"
+            >…</span
+          >
+        </li>
+        {% endif %} {% endfor %}
+        <!-- next page -->
+        {% if denuncias.has_next %}
+        <li class="page-item">
+          <a
+            class="page-link"
+            href="{{ url_for('listado_seguimiento', page=denuncias.next_num, titulo=titulo) }}"
+            >»</a
+          >
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+          <a class="page-link">»</a>
+        </li>
+        {% endif %}
+      {% endif %}
+      </ul>
+    </div>
+    
+    <!-- FIN PAGINACION -->
+
+  {% endblock %}

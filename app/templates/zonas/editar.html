@@ -1,0 +1,175 @@
+{% extends "layout.html" %}{% block head %} 
+{{super() }}
+
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+
+<!-- draw -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js" integrity="sha512-ozq8xQKq6urvuU6jNgkfqAmT7jKN2XumbrX1JiB3TnF7tI48DPI4Gy1GXKD/V3EExgAs1V+pRO7vwtS1LHg0Gw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw-src.css" integrity="sha512-vJfMKRRm4c4UupyPwGUZI8U651mSzbmmPgR3sdE3LcwBPsdGeARvUM5EcSTg34DK8YIRiIo+oJwNfZPMKEQyug==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw-src.js" integrity="sha512-czICF/Crp0B7QB13iQZG9bYUpd/P1Ona1NeZN52gYsoVFXIpakDmdOUepMCHCMBIBd9Ei5Mlg8Quy4e504IT5A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" integrity="sha512-gc3xjCmIy673V6MyOAZhIW93xhM9ei1I+gLbmFjUHIjocENRsLX/QUE1htk5q1XV2D/iie/VQ8DXI6Vu8bexvQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<link rel="stylesheet" href="{{url_for('static', filename='css/mapa/map.css')}}">
+<script type="module" src="{{url_for('static', filename='js/zonas/index.js')}}"></script>
+
+
+
+{% endblock %}
+{% block content %} {% if mensaje %}
+
+<div class="alert alert-success" role="alert">
+  <ul>
+    <li>{{ mensaje }}</li>
+  </ul>
+</div>
+{% endif %} {% if mensaje_error %}
+<div class="alert alert-danger" role="alert">
+  <ul>
+    <li>{{ mensaje_error }}</li>
+  </ul>
+</div>
+{% endif %}
+
+<a href={{url_for('zonas_index')}}>
+<h4 style="padding: 4rem; display: flex; align-items: center;">
+
+  < 
+  <span style="margin-bottom: 0.25rem; margin-right: 1rem" >---</span>
+  Volver al index de Zonas inundables</h4>
+ </a>
+
+ 
+<h1>Editar Zona</h1>
+<div style="overflow: scroll;" class="container card-body">
+
+  <!-- info para js -->
+<div style='display: none;'>
+  <span id='coords'>{{zona.coordenadas}}</span>
+  <span id='color'>{{zona.color}} </span>
+</div>
+
+
+  <span style='padding: 1rem;' class="card-text">
+    <form action="{{ url_for('editar_zona', id=zona.id) }}" method="POST">
+      <section class="form-group">
+        <label for="titulo"> Nombre </label>
+        <input
+          type="text"
+          class="form-control form-control-lg rounded-0"
+          name="nombre"
+          id="nombre"
+          value="{{zona.nombre}}"
+          disabled
+        />
+      </section>
+
+         <section class="form-group">
+        <label for="titulo"> Cantidad de puntos </label>
+        <input
+          type="text"
+          class="form-control form-control-lg rounded-0"
+          name="nombre"
+          id="nombre"
+          value="{{cant}}"
+          disabled
+        />
+      </section>
+
+         <section class="form-group">
+        <label for="titulo"> Publicado </label>
+        <input
+          type="text"
+          class="form-control form-control-lg rounded-0"
+          name="nombre"
+          id="nombre"
+          {% if zona.estado%}value="Si"{%else%}value="No"{% endif %}
+          disabled
+        />
+      </section>
+
+      <section class="form-group">
+        <label for="titulo"> Color </label>
+        <p>Color actual: 
+          <!-- <span style="background-color: {{ zona.color }}; width: 1rem;">
+            
+          </span> -->
+        </p>
+          <select id="color" name="color" class="custom-select">
+          {% if zona.color == "#FF0000" %}
+          <option value="#0000FF"> 
+             <span style="background-color: blue; width: 1rem; height: 1rem;">
+
+             </span> Azul</option>
+          <option selected="true" value="#FF0000">     <span style="background-color: red; width: 1rem; height: 1rem;">
+
+             </span> Rojo</option>
+          <option value="#FFFF00">     <span style="background-color: yellow; width: 1rem; height: 1rem;">
+
+             </span> Amarillo</option></option>
+          {% elif zona.color == "#0000FF" %}
+          <option value="#FF0000">Rojo</option>
+          <option value="#FFFF00"><span style="background-color: yellow; width: 1rem; height: 1rem;">
+
+             </span> Amarillo</option>
+          <option selected="true" value="#0000FF">Azul</option>
+          {% elif zona.color == "#FFFF00" %}
+          <option value="#FF0000"><span style="background-color: red; width: 1rem; height: 1rem;">
+
+             </span> Rojo</option>
+          <option selected="true" value="#FFFF00"><span style="background-color: yellow; width: 1rem; height: 1rem;">
+
+             </span> Amarillo</option>
+          <option value="#0000FF">
+             <span style="background-color: blue; width: 1rem; height: 1rem;">
+
+             </span> Azul</option>
+
+          {% else %}
+                 <option selected="true" value={{zona.color}}><span style="background-color: red; width: 1rem; height: 1rem;">
+
+             </span> Color Actual</option>
+          
+                   <option value="#FF0000"><span style="background-color: red; width: 1rem; height: 1rem;">
+
+             </span> Rojo</option>
+          <option  value="#FFFF00"><span style="background-color: yellow; width: 1rem; height: 1rem;">
+
+             </span> Amarillo</option>
+          <option value="#0000FF">
+             <span style="background-color: blue; width: 1rem; height: 1rem;">
+
+             </span> Azul</option>
+          {% endif %}
+        </select>
+        <!-- <input
+          type="text"
+          class="form-control form-control-lg rounded-0"
+          name="apellido"
+          id="apellido"
+          value="{{zona.color}}"
+          required
+        /> -->
+      </section>
+
+      <div class="text-right">
+        <a href="{{ url_for('zonas_index') }}" class="btn btn-white"
+          >Cancelar</a
+        >
+        <button type="submit" class="btn btn-info">Aceptar</button>
+      </div>
+    </form>
+  </span>
+
+
+
+  <div style='padding: 1rem;' class="map-container">
+
+    <div id='mapid'>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

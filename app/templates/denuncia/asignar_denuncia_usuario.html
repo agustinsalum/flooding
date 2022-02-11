@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block content %}
+{% if mensaje %}
+<div class="alert alert-success" role="alert">
+    <ul>
+        <li>{{ mensaje }}</li>
+    </ul>
+</div>
+{% endif %}
+<h1>Asignar Denuncia a un Usuario</h1>
+<div class="container card-body">
+    <span class="card-text">
+        <form action="{{ url_for('asignar_denuncia_usuario', id=denuncia.id_denuncia) }}" method="POST">
+            <section class="form-group">
+                <label for="titulo"> Título de la Denuncia</label>                
+                <input type="text" class="form-control form-control-lg rounded-0" name="titulo" id="titulo" value="{{ denuncia.titulo }}" readonly>
+            </section>                    
+            <section class="form-group">
+                <label for="usuarioAsignadoNuevo"> Seleccione el Usuario que Gestionará la Denuncia </label>
+                    <select name="usuarioAsignadoNuevo" class="selectpicker form-control">
+                    {% for usuario in usuarios %}
+                        <option value="{{ usuario.id }}">{{ usuario.usuario }}</option>
+                    {% endfor %}
+                    </select>
+            </section>            
+            <div class="text-right">
+                <a href="{{ url_for('denuncias') }}" class="btn btn-white">Cancelar</a>
+                <button type="submit" class="btn btn-info">Aceptar</button>
+            </div>              
+        </form>
+    </span>
+</div>
+{% endblock %}

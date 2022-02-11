@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script type="text/javascript" src="Scripts/jquery-2.1.1.min.js"></script>
+
+    <!--- Include Leaflet CSS --->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+      crossorigin=""
+    />
+
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script
+      src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+      integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+      crossorigin=""
+    ></script>
+
+    <!-- Metadatos -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--link de BOOTSTRAP-->
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename = 'css/bootstrap.min.css')}}"
+    />
+
+    <link
+      rel="StyleSheet"
+      href="{{url_for('static', filename = 'css/mapa/map.css')}}"
+      type="text/css"
+      media="screen"
+    />
+
+    <!--Estilo del sitio -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/base.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/opcionesUsuario.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/ver_perfil.css')}}"
+    />
+    <link rel="icon" type="image/png" href="../static/images/favicon.png" />
+
+    <!--Titulo -->
+    <title>Flooding</title>
+
+    <!--Funcionalidad de los mapas -->
+
+    <script src="{{url_for('static', filename='js/leaflet')}}"></script>
+
+    <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+    {% if configuracion_colores.configurated %}
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/themes/' + configuracion_colores.obtener_configuracion_color_primario() + '.css')}}"
+    />
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/themes/' + configuracion_colores.obtener_configuracion_color_secundario() + '.css')}}"
+    />
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/themes/' + configuracion_colores.obtener_configuracion_color_terciario() + '.css')}}"
+    />
+
+    {% endif %} {% block head %} {% endblock %}
+  </head>
+  <body>
+    {% include "navbar.html" %}
+    <!--  empieza el codigo en phyton para empezar el bloque a mostrar-->
+    {% block content %} {% endblock %}
+    <!--  empieza el codigo en phyton para empezar el bloque a mostrar-->
+
+    {% include "footer.html" %}
+    <script src="{{url_for('static', filename='js/denuncia/mapa.js')}}"></script>
+    <script src="{{url_for('static', filename='js/denuncia/map_denuncia_editar.js')}}"></script>
+    <script src="{{url_for('static', filename='js/punto/mapa.js')}}"></script>
+    <script src="{{url_for('static', filename='js/punto/map_punto_editar.js')}}"></script>
+    <script src="{{url_for('static', filename='js/mapaSimple/mapa.js')}}"></script>
+    <script src="{{url_for('static', filename='js/denuncia/estadocerrado.js')}}"></script>
+    
+
+  </body>
+</html>

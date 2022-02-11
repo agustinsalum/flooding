@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% block content %}
+{% if mensaje %}
+<div class="alert alert-success" role="alert">
+    <ul>
+        <li>{{ mensaje }}</li>
+    </ul>
+</div>
+{% endif %}
+{% if mensaje_error %}
+<div class="alert alert-danger" role="alert">
+    <ul>
+        <li>{{ mensaje_error }}</li>
+    </ul>
+</div>
+{% endif %}
+<h1>Editar Usuario</h1>
+<div class="container card-body">
+    <span class="card-text">
+        <form action="{{ url_for('editar_usuario', id=usuario.id) }}" method="POST">
+            <section class="form-group">
+                <label for="titulo"> Usuario </label>
+                <input type="text" class="form-control form-control-lg rounded-0" name="usuario" id="usuario" value="{{usuario.usuario}}" required>
+            </section>            
+            <section class="form-group">
+                <label for="titulo"> Nombre </label>
+                <input type="text" class="form-control form-control-lg rounded-0" name="nombre" id="nombre" value="{{usuario.nombre}}" required>
+            </section>
+
+            <section class="form-group">
+                <label for="titulo"> Apellido </label>
+                <input type="text" class="form-control form-control-lg rounded-0" name="apellido" id="apellido"
+                value="{{usuario.apellido}}" required>
+            </section>
+            <section class="form-group">
+                <label for="titulo"> E-Mail </label>
+                <input type="text" class="form-control form-control-lg rounded-0" name="email" id="email" value="{{usuario.email}}" required>
+            </section>
+            <section class="form-group">
+                <label for="roles"> Roles de usuario </label><br>
+                {% for rol in roles %}
+                <input type="checkbox" id="cb{{rol.id}}" name="roles" value="{{rol.id}}"
+                    {% if rol in usuario.roles %}checked{% endif %}
+                >
+                <span class="badge badge-info">{{rol.nombre}}</span><br>
+                {% endfor %}
+            </section>
+
+            <div class="text-right">
+                <a href="{{ url_for('listado_usuarios') }}" class="btn btn-white">Cancelar</a>
+                <button type="submit" class="btn btn-info">Aceptar</button>
+            </div>
+        </form>
+    </span>
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Denuncias</h1>
+
+{%if permisos.tiene_el_permiso("denuncia_index")%}
+<span
+  alt="Agregar denuncia"
+  title="Agregar denuncia"
+  class="fas fa-user-edit"
+  ><a href="{{ url_for('agregarDenuncia')}}" class="btn btn-info"
+    >Agregar denuncia</a
+  ></span
+>
+{%endif%}
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sitio Inactiva</title>
+
+</head>
+<body>
+	<div class="page-wrap d-flex pt-5 flex-row align-items-center">
+	    <div class="container">
+	        <div class="row justify-content-center">
+	            <div class="col-md-12 text-center">
+	                <span class="display-1 d-block">Sitio Inactivo</span>
+	                <div class="mb-4 lead">Nos encontramos en pleno trabajo de mantenimiento, disculpe las molestias.</div>
+	                <a href="{{ url_for('index')}}" class="btn btn-link">Volver</a>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+</body>
+</html>
+{% endblock %}

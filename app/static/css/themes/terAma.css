@@ -1,0 +1,30 @@
+details > summary {
+  background-color: #eef3d4;
+  box-shadow: 1px 1px 2px #dbd3a4;
+  color: #cddf31;
+}
+
+details > p {
+  background-color: #eef1df;
+  box-shadow: 1px 1px 2px #865757;
+}
+
+#menu ul li:hover {
+  background: #e0d77f;
+}
+
+#menu ul li {
+  background-color: #d6ee4d;
+}
+
+#menu ul a {
+  color: rgb(255, 255, 228);
+}
+
+.containerOwnApp {
+  box-shadow: 0 0 27px 0 rgba(77, 76, 34, 0.62);
+}
+
+.login-form {
+  box-shadow: 0 0 27px 0 rgba(70, 71, 32, 0.62);
+}

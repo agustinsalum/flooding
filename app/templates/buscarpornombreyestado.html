@@ -1,0 +1,29 @@
+<!--<form name="pun" id="pun" action="" method="POST">
+    <div class="form-inline">-->
+		<label for="nombre">Nombre: </label>
+            {% if  nombre == " " %}
+                <input type="text" placeholder="Buscar por nombre" id="nombre" name="nombre">      
+            {% else %}  
+                <input type="text" value="{{ nombre }}" id="nombre" name="nombre">      
+            {% endif %}
+        <label for="puntos">Estado: </label><br>
+        <select class="form-control" name="estado" id="estado">          
+            {% if  estado == 0 %}
+                <option value="1">Publicado</option>
+                <option value="0"selected>Despublicado</option>
+                <option value="todos">Todos</option>          
+            {% else %}
+                {% if  estado == 1 %}          
+                    <option value="1"selected>Publicado</option>
+                    <option value="0">Despublicado</option>
+                    <option value="todos">Todos</option>                
+                {% else %}
+                    <option value="1">Publicado</option>
+                    <option value="0">Despublicado</option>
+                    <option value="todos"selected>Todos</option>              
+                {% endif %}
+            {% endif %}          
+        </select><br>
+        <!--<input name="best" id="sec" class="btn btn-info" type="submit" value="Buscar">
+	</div>
+</form>-->
