@@ -14,8 +14,9 @@ from config import config
 
 # CLAVES PRIVADAS DE GOOGLE
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
-GOOGLE_CLIENT_ID = '853530354298-3hcp4cuv55hkjsphdsquknunb0tid1q1.apps.googleusercontent.com'
-GOOGLE_CLIENT_SECRET = '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'
+# claves privadas eliminadas
+GOOGLE_CLIENT_ID = ''
+GOOGLE_CLIENT_SECRET = ''
 GOOGLE_DISCOVERY_URL = (
     "https://accounts.google.com/.well-known/openid-configuration"
 )
