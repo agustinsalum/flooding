@@ -1,7 +1,7 @@
 # flooding
 Trabajo de la materia proyecto de software de la facultad de informática
 
-Lenguajes/tecnologias usadas:
+Lenguajes y tecnologias usadas:
 
    * Python
    * HTML
