@@ -1,6 +1,5 @@
 from os import environ
 
-
 class Config(object):
     """Base configuration."""
 
@@ -15,14 +14,14 @@ class Config(object):
         # Implement this method to do further configuration on your app.
         pass
 
-# Se va a ejecutar si estamos en el servidor de la catedra
+# Se ejecuta en Producccion
 class ProductionConfig(Config):
     """Production configuration."""
 
     DB_HOST = environ.get("DB_HOST", "localhost")
-    DB_USER = environ.get("DB_USER", "grupo39")
-    DB_PASS = environ.get("DB_PASS", "ZjdkMzNiNzgzYmI2")
-    DB_NAME = environ.get("DB_NAME", "grupo39")
+    DB_USER = environ.get("DB_USER", "nombre_user_producccion")
+    DB_PASS = environ.get("DB_PASS", "contraseña_producccion")
+    DB_NAME = environ.get("DB_NAME", "nombre_db_producccion")
 
     # GOOGLE DEL LADO DE PRODUCCION
     # CALLBACK es una funcion extensible que se ejecuta luego del suceso de un evento
@@ -31,11 +30,11 @@ class ProductionConfig(Config):
 
     # CREAR BASE DE DATOS CON SQLALCHEMY DEL LADO DE PRODUCCION
     SQLALCHEMY_HOST = environ.get("SQLALCHEMY_HOST", "localhost")
-    SQLALCHEMY_USER = environ.get("SQLALCHEMY_USER", "grupo39")
-    SQLALCHEMY_PASS = environ.get("SQLALCHEMY_PASS", "ZjdkMzNiNzgzYmI2")
+    SQLALCHEMY_USER = environ.get("SQLALCHEMY_USER", "nombre_user_producccion")
+    SQLALCHEMY_PASS = environ.get("SQLALCHEMY_PASS", "contraseña_producccion")
 
 
-# Se va a ejecutar si estamos localmente
+# Se ejecuta en Desarrollo
 class DevelopmentConfig(Config):
     """Development configuration."""
 
@@ -44,6 +43,7 @@ class DevelopmentConfig(Config):
     DB_PASS = environ.get("DB_PASS", "MY_DB_PASS")
     DB_NAME = environ.get("DB_NAME", "MY_DB_NAME")
 
+    
     # GOOGLE DEL LADO LOCAL
     GOOGLE_REDIRECT_URI_REGISTRO = environ.get("GOOGLE_REDIRECT_URI_REGISTRO", None)
     GOOGLE_REDIRECT_URI_INICIO   = environ.get("GOOGLE_REDIRECT_URI_INICIO", None)
@@ -70,4 +70,4 @@ config = dict(
 )
 
 ## More information
-# https://flask.palletsprojects.com/en/2.0.x/config/
+# https://flask.palletsprojects.com/en/2.3.x/config/#configuring-from-environment-variables

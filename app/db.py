@@ -11,8 +11,7 @@ def init_app(app):
 def config_db(app):
     from app.cargar_datos import cargar
 
-    @app.before_first_request
-    def init_database():
+    with app.app_context():
         # Creamos la base de datos. Se crean todos los modelos
         try:
             conexion()

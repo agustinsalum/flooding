@@ -13,4 +13,4 @@ def conexion():
     )
     mycursor = mydb.cursor()
     # Creamos la base de datos con el nombre grupo39
-    mycursor.execute("CREATE DATABASE grupo39")
+    mycursor.execute("CREATE DATABASE flooding")
