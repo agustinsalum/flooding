@@ -132,5 +132,5 @@ def listado(nombre=' ', estado='todos' , page=1):
         usuarios_actuales_activos = usuarios_actuales_activos.filter(Usuario.nombre.like('%' + nombre_alternativo + '%'))
     if estado_alternativo != 'todos':
         usuarios_actuales_activos = usuarios_actuales_activos.filter_by(activo = estado_alternativo)
-    usuarios_actuales_activos = usuarios_actuales_activos.paginate(page, per_page=per_page)
+    usuarios_actuales_activos = usuarios_actuales_activos.paginate(per_page=per_page)
     return render_template("user/listado.html", usuarios_actuales_activos=usuarios_actuales_activos, nombre = nombre_alternativo, estado = estado_alternativo)

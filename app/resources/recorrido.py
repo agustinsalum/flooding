@@ -41,7 +41,7 @@ def listado(nombre=' ', estado='todos', page=1):
         recorridos_actuales = recorridos_actuales.filter(Recorrido.nombre.like('%' + nombre_alternativo + '%'))
     if estado_alternativo != 'todos':
         recorridos_actuales = recorridos_actuales.filter_by(estado = estado_alternativo)
-    recorridos_actuales = recorridos_actuales.paginate(page, per_page=per_page)
+    recorridos_actuales = recorridos_actuales.paginate(per_page=per_page)
     return render_template("recorrido/listado.html", recorridos_actuales = recorridos_actuales, nombre = nombre_alternativo, estado = estado_alternativo)
 
 

@@ -44,7 +44,7 @@ def listado(nombre=' ', estado='todos', page=1):
         usuarios_google = usuarios_google.filter(UsuarioGoogle.nombre.like('%' + nombre_alternativo + '%'))
     if estado_alternativo != 'todos':
         usuarios_google = usuarios_google.filter_by(aprobado = estado_alternativo)
-    usuarios_google = usuarios_google.paginate(page, per_page=per_page)
+    usuarios_google = usuarios_google.paginate(per_page=per_page)
     return render_template("google/listado.html", usuarios_google=usuarios_google, nombre = nombre_alternativo, estado = estado_alternativo)
 
 

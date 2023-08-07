@@ -43,7 +43,7 @@ def listado(nombre=' ', estado='todos', page=1):
         puntosActuales = puntosActuales.filter(PuntoEncuentro.nombre.like('%' + nombre_alternativo + '%'))
     if estado_alternativo != 'todos':
         puntosActuales = puntosActuales.filter_by(estado = estado_alternativo)
-    puntosActuales = puntosActuales.paginate(page, per_page=per_page)
+    puntosActuales = puntosActuales.paginate(per_page=per_page)
 
     return render_template("puntos/listado.html", puntosActuales=puntosActuales, nombre = nombre_alternativo, estado = estado_alternativo)
 

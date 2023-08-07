@@ -95,7 +95,7 @@ def listado(titulo=' ', estado='todas', page=1, fecha_desde='dd/mm/aaaa', fecha_
         denuncias = denuncias.filter_by(estado_id = estado_alternativo) 
     if (fecha_desde_alternativo != 'dd/mm/aaaa' or fecha_hasta_alternativo != 'dd/mm/aaaa'):         
         denuncias = denuncias.filter(Denuncia.fecha_creacion.between(fecha_desde_alternativo, fecha_hasta_alternativo))        
-    denuncias = denuncias.paginate(page, per_page=per_page)
+    denuncias = denuncias.paginate(per_page=per_page)
     return render_template("denuncia/listado.html", denuncias=denuncias, titulo = titulo_alternativo, estado = estado_alternativo, fecha_desde = fecha_desde_alternativo, fecha_hasta = fecha_hasta_alternativo)
     
 #Edicion de un usuario seleccionado en la lista
