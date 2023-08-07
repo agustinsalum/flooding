@@ -166,7 +166,7 @@ def listado_seguimiento(titulo=' ', page=1):
         denuncias = denuncias.query.order_by(Denuncia.titulo.asc())
     if titulo_alternativo != ' ':
         denuncias = denuncias.filter(Denuncia.titulo.like('%' + titulo_alternativo + '%'))
-    denuncias = denuncias.paginate(page, per_page=per_page)
+    denuncias = denuncias.paginate(per_page=per_page)
     return render_template("denuncia/listado_seguimiento.html", denuncias=denuncias, titulo = titulo_alternativo)    
 
 def validar_denuncia(id):

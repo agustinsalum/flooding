@@ -171,14 +171,31 @@ pip install -r requirements.txt
 Asegurese de activar el entorno virtual antes de instalar las dependencias. En caso de error en la dependencia "psycopg2" se soluciona con "sudo apt install libpq-dev build-essential"
 
 
-## Iniciar el proyecto
+## Iniciar el proyecto (parte privada)
 
+En la parte privada los operadores aceptan o rechazan las denunciadas enviadas en la parte publica por los ciudanos.
 Una vez realizada la configuracion e instalado el entorno virtual podemos iniciar el proyecto. Para iniciar el proyecto solamente debe ingresar en la terminal:
 
 ```
 flask run
 ```
 
-Le debera aparecer el mensaje 'Debug mode: on' y una advertencia de produccion. Tenga en cuenta que la primera vez puede tardar, ya que se esta creando la base de datos, las tablas y los atributos correspondientes. 
+Le debera aparecer el mensaje 'Debug mode: on' y una advertencia de produccion. Tenga en cuenta que la primera vez puede tardar, ya que se esta creando la base de datos, las tablas y los atributos correspondientes.
+
+## Iniciar el proyecto (parte publica)
+
+En la parte publica los ciudadanos envian las denunciadas. Fue realizado con vue.js y para hacerlo funcionar debe seguir los siguentes pasos:
+
+```
+cd web
+```
+
+```
+npm install
+```
+
+```
+npm run serve
+```
 
 
