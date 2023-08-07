@@ -1,5 +1,5 @@
 web/node_modules/
-/*_session/
+flash_session/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
