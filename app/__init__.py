@@ -43,9 +43,8 @@ def create_app(environment="development"):
 
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
-    # auto sqlalchemy
-    init_app(app)
-    # fin auto sqlalchemy
+
+    #init_app(app)
 
     #OAuth
     app.secret_key = 'randomsecretkey'
@@ -84,9 +83,6 @@ def create_app(environment="development"):
     app.jinja_env.globals.update(permisos=permisos)
     app.jinja_env.globals.update(auth=auth)
     app.jinja_env.globals.update(configuracion_colores=configuracion_colores)
-
-    
-
     
 
     # Autenticacion
@@ -305,12 +301,7 @@ def create_app(environment="development"):
 
     @app.route('/')
     def index():
-        
-        # verificar permisos
-        # if permisos.sitio_cerrado() and permisos.no_es_admin():
-        #     abort(503)
-        
-
+        init_app(app)
         configuracion = Configuracion.obtener_configuracion()
         return render_template('index.html', configuracion=configuracion)
     return app

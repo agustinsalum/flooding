@@ -18,9 +18,6 @@ def config_db(app):
             #db.drop_all() # Elimina todas las tablas
             db.create_all() # Crea todas las tablas
             cargar(db) # Carga los datos de las tablas
-        # Si va por el except, significa que la base de datos ya existe
-        except mysql.connector.Error:
-            pass # declaración nula
-    @app.teardown_request
-    def close_session(exeption=None):
-        db.session.remove()
+        # La base de datos ya existe o "err" nos detallara otro posible error
+        except mysql.connector.Error as err:
+            print(f"Entro al except por: {err}")

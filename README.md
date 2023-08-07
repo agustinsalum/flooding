@@ -25,3 +25,32 @@ También se desarrollará una aplicación pública, que permitirá visualizar la
 - Realizar denuncias sobre: alcantarillas tapadas y basurales. También se pueden pensar en otros tipos de denuncias que pueden ser de inteŕes para la aplicación.
 - Visualizar recorrido de evacuación de acuerdo a la ubicación del usuario.
 
+## Configuracion
+
+El archivo '.env' es un archivo de configuración que se utiliza para almacenar variables de entorno en tu proyecto. Las variables de entorno son valores que se utilizan para configurar y personalizar la aplicación sin tener que codificar valores directamente en el código fuente. Esto proporciona una mayor seguridad y flexibilidad, ya que puedes cambiar la configuración sin necesidad de modificar el código. Los pasos son los siguentes:
+
+1. Crea el archivo: En la raíz de tu proyecto, crea un archivo llamado .env.
+
+2. Define las variables de entorno: Dentro del archivo .env, define las variables de entorno necesarias para tu proyecto. Cada variable se define en una línea separada y sigue el formato NOMBRE=VALOR. Por ejemplo:
+
+```
+DB_HOST=mi_host
+DB_PORT=mi_port
+DB_USER=mi_user
+DB_PASS=mi_pass
+DB_NAME=mi_name_db
+FLASK_ENV=development
+FLASK_DEBUG=1
+```
+
+## Iniciar el proyecto
+
+Para iniciar el proyecto solamente debe ingresar en la terminal:
+
+```
+flask run
+```
+
+Le debera aparecer el mensaje 'Debug mode: on' y una advertencia de produccion. Tenga en cuenta que la primera vez puede tardar, ya que se esta creando la base de datos, las tablas y los atributos correspondientes. 
+
+
