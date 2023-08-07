@@ -168,7 +168,7 @@ cd flooding
 pip install -r requirements.txt
 ```
 
-En caso de error en la dependencia "psycopg2" se soluciona con "sudo apt install libpq-dev build-essential"
+Asegurese de activar el entorno virtual antes de instalar las dependencias. En caso de error en la dependencia "psycopg2" se soluciona con "sudo apt install libpq-dev build-essential"
 
 
 ## Iniciar el proyecto
