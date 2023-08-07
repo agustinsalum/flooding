@@ -29,9 +29,11 @@ También se desarrollará una aplicación pública, que permitirá visualizar la
 
 El archivo '.env' es un archivo de configuración que se utiliza para almacenar variables de entorno en tu proyecto. Las variables de entorno son valores que se utilizan para configurar y personalizar la aplicación sin tener que codificar valores directamente en el código fuente. Esto proporciona una mayor seguridad y flexibilidad, ya que puedes cambiar la configuración sin necesidad de modificar el código. Los pasos son los siguentes:
 
-1. Crea el archivo: En la raíz de tu proyecto, crea un archivo llamado .env.
+1. Instalar bases de datos: instalar mysql server y mysql workbench.
 
-2. Define las variables de entorno: Dentro del archivo .env, define las variables de entorno necesarias para tu proyecto. Cada variable se define en una línea separada y sigue el formato NOMBRE=VALOR. Por ejemplo:
+1. Crea el archivo: En la raíz de tu proyecto, crea un archivo llamado '.env'.
+
+2. Define las variables de entorno: Dentro del archivo '.env', define las variables de entorno necesarias para tu proyecto. Cada variable se define en una línea separada y sigue el formato NOMBRE=VALOR. En este caso:
 
 ```
 DB_HOST=mi_host
@@ -43,9 +45,135 @@ FLASK_ENV=development
 FLASK_DEBUG=1
 ```
 
+## Entorno virtual: virtualenv
+
+Virtualenv es una herramienta para manejar versiones. La idea de usar este tipo de herramientas son:
+
+* Instalar prácticamente cualquier versión de Python (o del lenguaje que sea)
+* Permitir tener instaladas múltiples versiones
+
+Como paso previo, debemos instalar las dependencias necesarias:
+
+Actualizamos e instalamos dependencias necesarias:
+
+```
+sudo apt-get update;
+```
+
+```
+sudo apt-get install make build-essential libssl-dev zlib1g-dev \ libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \ libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+```
+
+Instalamos pyenv:
+
+```
+mkdir $HOME/.pyenv
+```
+
+```
+git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+```
+
+```
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
+```
+
+```
+echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
+```
+
+```
+echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n eval "$(pyenv init -)"\nfi' >> ~/.bashrc
+```
+
+Por último:
+
+```
+exec “$SHELL”
+```
+
+```
+pyenv install --list // nos muestra la lista de versiones para instalar
+```
+
+```
+pyenv install 3.x.x // version preferida
+```
+
+```
+pyenv versions // nos muestra las versiones instaladas y la del sistema
+```
+
+```
+pyenv global 3.x.x
+```
+
+Verificamos:
+
+```
+python
+```
+
+## Crear un entorno virtual
+
+Nos tenemos que asegurar que pip apunta a pyenv y ver que pip pertenece a la versión de Python que acabas de seleccionar como global:
+
+```
+pyenv global 3.x.x
+```
+
+Nos paramos en nuestro proyecto y tecleamos python --version. Debería aparecer la versión de python elegida. Ahora vamos a crear un directorio virtual llamado venv para la versión de Python que hayamos configurado como global:
+
+```
+pip install virtualenv
+```
+
+```
+virtualenv -p python venv
+```
+
+## Como usar el entorno virtual
+
+Para activar el entorno ejecutamos:
+
+```
+source venv/bin/activate
+```
+
+Es necesario desactivar si queremos volver a usar el Python que instalamos
+globalmente:
+
+```
+deactivate
+```
+
+## Pasos para usar el proyecto
+
+
+1. Clonamos el repositorio
+
+```
+git clone git@github.com:agustinsalum/flooding.git
+```
+
+2. Acceder a la carpeta clonada
+
+```
+cd flooding
+```
+
+3. Instalar las dependencias
+
+```
+pip install -r requirements.txt
+```
+
+En caso de error en la dependencia "psycopg2" se soluciona con "sudo apt install libpq-dev build-essential"
+
+
 ## Iniciar el proyecto
 
-Para iniciar el proyecto solamente debe ingresar en la terminal:
+Una vez realizada la configuracion e instalado el entorno virtual podemos iniciar el proyecto. Para iniciar el proyecto solamente debe ingresar en la terminal:
 
 ```
 flask run
