@@ -4,7 +4,7 @@
     <mapa tipo="punto" :data="this.data" :key="this.data"></mapa>
     <paginador
       tipo="punto"
-      endpoint="puntos-encuentro"
+      endpoint="puntos"
       @change-data="getData"
     ></paginador>
   </div>

@@ -4,7 +4,7 @@
     <mapa tipo="recorrido" :data="this.data" :key="this.data"></mapa>
     <paginador
       tipo="recorrido"
-      endpoint="recorridos-evacuacion"
+      endpoint="recorridos"
       @change-data="getData"
     ></paginador>
   </div>

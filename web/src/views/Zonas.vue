@@ -5,7 +5,7 @@
 
     <paginador
       tipo="zona"
-      endpoint="zonas-inundables"
+      endpoint="zonas"
       @change-data="getData"
     ></paginador>
   </div>
