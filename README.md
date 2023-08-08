@@ -224,7 +224,8 @@ https://www.postman.com/downloads/
 
 2. Listado de endpoints (metodo http get):
 
-/api/denuncia/id (GET)
+```
+/api/denuncia/id
 /api/denuncias/page
 /api/zona/id
 /api/zonas
@@ -233,6 +234,7 @@ https://www.postman.com/downloads/
 /api/puntos
 /api/recorrido/id
 /api/recorridos
+```
 
 3. Listado de endpoints (metodo http post):
 
