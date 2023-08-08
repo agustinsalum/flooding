@@ -8,7 +8,6 @@
 
 <script>
 import 'leaflet/dist/leaflet.css'
-// Debemos instalar "npm install leaflet"
 // Necesario para el mapa
 import L from 'leaflet'
 delete L.Icon.Default.prototype._getIconUrl

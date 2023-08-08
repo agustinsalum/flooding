@@ -39,7 +39,10 @@ GOOGLE_DISCOVERY_URL = (
 def create_app(environment="development"):
     # Configuración inicial de la app
     app = Flask(__name__)
+    
+    # Política de seguridad en los navegadores
     CORS(app)
+
 
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
