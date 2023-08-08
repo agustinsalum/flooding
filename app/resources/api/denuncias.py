@@ -28,9 +28,10 @@ def mostrar_denuncia(id):
     return jsonify(resp), 200
 
 #https://flask-sqlalchemy.palletsprojects.com/en/2.x/api/#flask_sqlalchemy.Pagination
+# Muestra todas las denuncias cerradas
 def mostrar_denuncias(page=1):
     totalelementos= configuracion_colores.obtener_configuracion().cantidad_elementos_pagina
-    denuncias = Denuncia.obtener_cerrados().paginate(page, per_page=totalelementos)
+    denuncias = Denuncia.obtener_cerrados().paginate(per_page=totalelementos)
     lista = []
     for denuncia in denuncias.items:
         dic= { "id_denuncia" : denuncia.id_denuncia,

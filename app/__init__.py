@@ -245,7 +245,7 @@ def create_app(environment="development"):
 
      # Endpoints para la api
     app.add_url_rule('/api/denuncia/<int:id>', 'mostrar_denuncia',denuncias.mostrar_denuncia, methods=['GET'])
-    app.add_url_rule('/api/get-denuncias', 'mostrar_denuncias',denuncias.mostrar_denuncias, methods=['GET'])
+    app.add_url_rule('/api/denuncias/page', 'mostrar_denuncias',denuncias.mostrar_denuncias, methods=['GET'])
     app.add_url_rule('/api/zonas-inundables/<int:id>/', 'mostrar_zona',zonasinundables.mostrar_zona, methods=['GET'])
     app.add_url_rule('/api/zonas-inundables', 'mostrar_zonas',zonasinundables.mostrar_zonas, methods=['GET'])
     app.add_url_rule('/api/crear_denuncia','crear_denuncia',denuncias.crear_denuncia, methods=['POST'])
