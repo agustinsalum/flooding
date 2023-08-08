@@ -118,6 +118,7 @@ def crear_denuncia():
                 result['email'],
                 result['categoria'])
             dic = { "atributos" : result }
+            print (dic)
             return jsonify(dic), 201
     except:
         return jsonify({"error": "422 Entidad no procesable"}), 422

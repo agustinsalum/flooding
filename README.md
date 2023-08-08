@@ -186,9 +186,13 @@ Le debera aparecer el mensaje 'Debug mode: on' y una advertencia de produccion. 
 
 En la parte publica los ciudadanos envian las denunciadas. Fue realizado con vue.js y para hacerlo funcionar debe seguir los siguentes pasos:
 
+1. Accedemos a la carpeta:
+
 ```
 cd web
 ```
+
+2. Instalamos:
 
 ```
 npm install
@@ -202,8 +206,48 @@ npm install axios
 npm install leaflet
 ```
 
+3. Iniciamos:
+
 ```
 npm run serve
 ```
 
+## Listado de endpoints para Postman
 
+Puede probar si funciona los endpoints en Postman. Para eso:
+
+1. Descargue postman
+
+```
+https://www.postman.com/downloads/
+```
+
+2. Listado de endpoints (metodo http get):
+
+/api/denuncia/id (GET)
+/api/denuncias/page
+/api/zona/id
+/api/zonas
+/api/crear_denuncia
+/api/punto/id
+/api/puntos
+/api/recorrido/id
+/api/recorridos
+
+3. Listado de endpoints (metodo http post):
+
+/api/crear_denuncia
+
+```
+ {
+     "titulo":"Alcantarilla tapada",
+     "categoria":"Basural",
+     "descripcion":"una descripcion valida",
+     "latitud":"-34.61",
+     "longitud":"-58.38",
+     "apellido":"un_apellido",
+     "email":"abcdefghi@hotmail.com",
+     "nombre":"un_nombre",
+     "telefono":"222226666"
+ }
+```
