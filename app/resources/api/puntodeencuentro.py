@@ -32,13 +32,13 @@ def mostrar_puntos(page=1, size=3, name=''):
         if request.args.get('name') != None:
             name = request.args.get('name')
     if name == '':
-     puntos = PuntoEncuentro.obtener_activos().paginate(int(page), per_page=int(size))
+     puntos = PuntoEncuentro.obtener_activos().paginate(per_page=int(size))
     else:
         p = PuntoEncuentro.filtrar_por_nombre(name).first()
         print('punto')
         print(p)
         if p:
-            puntos = PuntoEncuentro.filtrar_por_nombre(name).paginate(int(page), per_page=int(size))
+            puntos = PuntoEncuentro.filtrar_por_nombre(name).paginate(per_page=int(size))
             print(puntos.items)
         else:
             error = 'No existen puntos que contengan esos caracteres'

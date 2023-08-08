@@ -49,7 +49,7 @@ def index(nombre=' ', estado="todos", page=1, mensaje = None):
       zonas = zonas.filter(Zona.nombre.like('%' + nombre_alternativo + '%'))
   if estado_alternativo != 'todos':
       zonas = zonas.filter_by(estado = estado_alternativo)
-  zonas = zonas.paginate(page, per_page=per_page)
+  zonas = zonas.paginate(per_page=per_page)
 
   return render_template("zonas/index.html", zonas=zonas, nombre = nombre_alternativo, estado = estado_alternativo, mensaje= mensaje)
 

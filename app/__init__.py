@@ -244,15 +244,15 @@ def create_app(environment="development"):
     
 
      # Endpoints para la api
-    app.add_url_rule('/api/denuncia/<int:id>', 'mostrar_denuncia',denuncias.mostrar_denuncia, methods=['GET'])
-    app.add_url_rule('/api/denuncias/page', 'mostrar_denuncias',denuncias.mostrar_denuncias, methods=['GET'])
-    app.add_url_rule('/api/zonas-inundables/<int:id>/', 'mostrar_zona',zonasinundables.mostrar_zona, methods=['GET'])
-    app.add_url_rule('/api/zonas-inundables', 'mostrar_zonas',zonasinundables.mostrar_zonas, methods=['GET'])
-    app.add_url_rule('/api/crear_denuncia','crear_denuncia',denuncias.crear_denuncia, methods=['POST'])
-    app.add_url_rule('/api/punto/<int:id>', 'mostrar_punto',puntodeencuentro.mostrar_punto, methods=['GET'])
-    app.add_url_rule('/api/puntos-encuentro', 'mostrar_puntos',puntodeencuentro.mostrar_puntos, methods=['GET'])
-    app.add_url_rule('/api/recorrido/<int:id>', 'mostrar_recorrido',recorridoevacuacion.mostrar_recorrido, methods=['GET'])
-    app.add_url_rule('/api/recorridos-evacuacion', 'mostrar_recorridos',recorridoevacuacion.mostrar_recorridos , methods=['GET'])
+    app.add_url_rule('/api/denuncia/<int:id>'  , 'mostrar_denuncia',denuncias.mostrar_denuncia, methods=['GET'])
+    app.add_url_rule('/api/denuncias/page'     , 'mostrar_denuncias',denuncias.mostrar_denuncias, methods=['GET'])
+    app.add_url_rule('/api/zona/<int:id>/'     , 'mostrar_zona',zonasinundables.mostrar_zona, methods=['GET'])
+    app.add_url_rule('/api/zonas'              , 'mostrar_zonas',zonasinundables.mostrar_zonas, methods=['GET'])
+    app.add_url_rule('/api/crear_denuncia'     ,'crear_denuncia',denuncias.crear_denuncia, methods=['POST'])
+    app.add_url_rule('/api/punto/<int:id>'     , 'mostrar_punto',puntodeencuentro.mostrar_punto, methods=['GET'])
+    app.add_url_rule('/api/puntos'             , 'mostrar_puntos',puntodeencuentro.mostrar_puntos, methods=['GET'])
+    app.add_url_rule('/api/recorrido/<int:id>' , 'mostrar_recorrido',recorridoevacuacion.mostrar_recorrido, methods=['GET'])
+    app.add_url_rule('/api/recorridos'         , 'mostrar_recorridos',recorridoevacuacion.mostrar_recorridos , methods=['GET'])
     
 
 

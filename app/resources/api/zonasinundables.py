@@ -32,13 +32,13 @@ def mostrar_zonas(page=1, size=3, name=''):
         if request.args.get('name') != None:
             name = request.args.get('name')
     if name == '':
-        zonas = Zona.obtener_activos().paginate(int(page), per_page=int(size))
+        zonas = Zona.obtener_activos().paginate(per_page=int(size))
     else:
         z = Zona.filtrar_por_nombre(name).first()
         print('zona')
         print(z)
         if z:
-            zonas = Zona.filtrar_por_nombre(name).paginate(int(page), per_page=int(size))
+            zonas = Zona.filtrar_por_nombre(name).paginate(per_page=int(size))
             print(zonas.items)
         else:
             error = 'No existen zonas que contengan esos caracteres'

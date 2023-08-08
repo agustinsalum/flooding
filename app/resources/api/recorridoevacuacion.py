@@ -36,13 +36,13 @@ def mostrar_recorridos(page=1, size=3, name=''):
         if request.args.get('name') != None:
             name = request.args.get('name')
     if name == '':
-     recorridos = Recorrido.obtener_activos().paginate(int(page), per_page=int(size))
+     recorridos = Recorrido.obtener_activos().paginate(per_page=int(size))
     else:
         r = Recorrido.filtrar_por_nombre(name).first()
         # print('recorrido')
         # print(r)
         if r:
-            recorridos = Recorrido.filtrar_por_nombre(name).paginate(int(page), per_page=int(size))
+            recorridos = Recorrido.filtrar_por_nombre(name).paginate(per_page=int(size))
             # print(recorridos.items)
         else:
             error = 'No existen recorridos que contengan esos caracteres'
