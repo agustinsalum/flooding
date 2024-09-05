@@ -292,15 +292,15 @@ You can test if the endpoints work in Postman. To do this:
 2. List of endpoints (HTTP GET method):
 
     ```
-    /api/report/id
-    /api/reports/page
-    /api/area/id
-    /api/areas
-    /api/create_report
-    /api/point/id
-    /api/points
-    /api/route/id
-    /api/routes
+    /api/denuncia/id
+    /api/denuncias/page
+    /api/zona/id
+    /api/zonas
+    /api/crear_denuncia
+    /api/punto/id
+    /api/puntos
+    /api/recorrido/id
+    /api/recorridos
     ```
 
 3. List of endpoints (HTTP POST method):
@@ -309,15 +309,15 @@ You can test if the endpoints work in Postman. To do this:
 
     ```
      {
-         "title":"Blocked Drain",
-         "category":"Garbage",
-         "description":"a valid description",
-         "latitude":"-34.61",
-         "longitude":"-58.38",
-         "surname":"a_surname",
-         "email":"example@hotmail.com",
-         "name":"a_name",
-         "phone":"222226666"
+        "titulo":"Alcantarilla tapada",
+        "categoria":"Basural",
+        "descripcion":"una descripcion valida",
+        "latitud":"-34.61",
+        "longitud":"-58.38",
+        "apellido":"un_apellido",
+        "email":"abcdefghi@hotmail.com",
+        "nombre":"un_nombre",
+        "telefono":"222226666"  
      }
     ```
 
