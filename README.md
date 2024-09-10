@@ -237,7 +237,7 @@ In the private part, operators accept or reject reports submitted publicly by ci
     flask run
     ```
 
-You should see the message 'Debug mode: on' and a production warning. Note that the first run may take longer as the database, tables, and corresponding attributes are being created.
+You should see the message 'Debug mode: on' and a production warning. Note that the first run may take longer as the database, tables, and corresponding attributes are being created. You can find the access credentials in the file "cargar_datos.py".
 
 ## Start the Project (Public Part)
 
